@@ -6,9 +6,8 @@ import java.util.Properties;
 
 public class TokenRetriever {
 
-    public String getTelegramBotToken(){
+    public static String getTelegramBotToken(){
         Properties prop = new Properties();
-
         try (InputStream input = TokenRetriever.class.getClassLoader().getResourceAsStream("token.properties")) {
 
             prop.load(input);
@@ -17,5 +16,9 @@ public class TokenRetriever {
             ex.printStackTrace();
         }
         return prop.getProperty("LocalManCannotBot_Token");
+    }
+
+    public static String getTelegramBotURL(){
+        return "https://api.telegram.org/bot" + getTelegramBotToken();
     }
 }
