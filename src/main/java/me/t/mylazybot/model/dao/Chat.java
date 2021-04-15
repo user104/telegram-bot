@@ -7,7 +7,7 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Chat {
 
-    private int id;
+    private String id;
     private String firstName;
     private String username;
     private String type;
@@ -15,11 +15,11 @@ public class Chat {
     public Chat() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

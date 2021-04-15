@@ -1,11 +1,8 @@
 package me.t.mylazybot.model.dao.results;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import me.t.mylazybot.model.dao.Message;
-
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class GetUpdatesResult {
     private int update_id;
     private Message message;
