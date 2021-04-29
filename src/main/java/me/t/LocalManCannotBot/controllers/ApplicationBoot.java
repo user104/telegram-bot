@@ -1,10 +1,11 @@
-package me.t.mylazybot.controllers;
+package me.t.LocalManCannotBot.controllers;
 
-import me.t.mylazybot.model.TokenRetriever;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class ApplicationBoot {
 
     public static void main(String[] args) {
