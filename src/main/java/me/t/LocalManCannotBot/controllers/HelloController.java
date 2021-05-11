@@ -12,21 +12,24 @@ import org.telegram.telegrambots.meta.api.methods.GetMe;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 @RestController
 public class HelloController {
 
+    private static final Logger logger = LogManager.getLogger();
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public BotApiMethod<?> webhookUpdate(@RequestBody Update update) {
         /* TEMPORARY IF BLOCK for debugging */
-        if (update.getMessage().hasText()) {
-            System.out.println("recieved text: " + update.getMessage().getText());
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            logger.debug("MESSAGE: firstName=" + update.getMessage().getFrom().getFirstName() + ", userName=" + update.getMessage().getFrom().getUserName() +"; recieved text: " + update.getMessage().getText());
+        } else {
+            logger.warn("NOT MESSAGE: " + update);
         }
-
         LocalManCannotBot localManCannotBot = new LocalManCannotBot();
         return localManCannotBot.onWebhookUpdateReceived(update);
-
     }
 
     @RequestMapping("/getMe")
@@ -34,7 +37,8 @@ public class HelloController {
         RestTemplate restTemplate = new RestTemplate();
         String getMeJsonStr = restTemplate.getForObject(TelegramBotProperties.getTelegramBotPath() + TelegramBotProperties.getTelegramBotToken() + "/getMe", String.class);
         GetMe gm = new GetMe();
-        User user = new User();;
+        User user = new User();
+        ;
         try {
             user = gm.deserializeResponse(getMeJsonStr);
         } catch (TelegramApiRequestException e) {
