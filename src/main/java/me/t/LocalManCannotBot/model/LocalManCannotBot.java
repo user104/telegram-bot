@@ -1,7 +1,5 @@
 package me.t.LocalManCannotBot.model;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -13,8 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 @Component
 public class LocalManCannotBot extends TelegramWebhookBot {
-
-    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public String getBotUsername() {
@@ -33,8 +29,6 @@ public class LocalManCannotBot extends TelegramWebhookBot {
         if (telegramBotAPI.isMessageWithText(update)) {
             sendMessage.setChatId(update.getMessage().getChatId().toString());
             sendMessage.setText(update.getMessage().getText());
-        } else {
-            logger.warn("isMessageWithText returned false");
         }
         return sendMessage;
     }

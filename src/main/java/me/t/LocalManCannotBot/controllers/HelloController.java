@@ -12,22 +12,12 @@ import org.telegram.telegrambots.meta.api.methods.GetMe;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 @RestController
 public class HelloController {
 
-    private static final Logger logger = LogManager.getLogger();
-
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public BotApiMethod<?> webhookUpdate(@RequestBody Update update) {
-        /* TEMPORARY IF BLOCK for debugging */
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            logger.debug("MESSAGE: firstName=" + update.getMessage().getFrom().getFirstName() + ", userName=" + update.getMessage().getFrom().getUserName() +"; recieved text: " + update.getMessage().getText());
-        } else {
-            logger.warn("NOT MESSAGE: " + update);
-        }
         LocalManCannotBot localManCannotBot = new LocalManCannotBot();
         return localManCannotBot.onWebhookUpdateReceived(update);
     }
